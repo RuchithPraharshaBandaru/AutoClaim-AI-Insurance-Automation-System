@@ -222,12 +222,14 @@ router.post('/', upload.array('files', 5), async (req, res) => {
       fileExtractions = await documentProcessor.processUploadedFiles(req.files);
     }
 
-    // Get LLM analysis if available — run fraud detection + medical necessity in parallel
+    // Pre-adjudicate with basic rules to check for instant rejections
+    // This saves expensive LLM API calls if the claim is already doomed (e.g., missing doctor reg)
+    let decision = await adjudicationEngine.adjudicate(normalized, null);
+
     let llmAnalysis = null;
-    let llmContextAnalysis = null;
     let fraudAnalysis = null;
 
-    if (llmService.isAvailable()) {
+    if (decision.decision !== 'REJECTED' && llmService.isAvailable()) {
       try {
         const [medNecessity, context, fraud] = await Promise.all([
           llmService.assessMedicalNecessity(
@@ -238,16 +240,14 @@ router.post('/', upload.array('files', 5), async (req, res) => {
           llmService.analyzeClaimContext(normalized),
           llmService.detectFraudAnomalies(normalized),
         ]);
-        llmAnalysis = medNecessity;
-        llmContextAnalysis = context;
+        
+        // Re-run adjudication engine with LLM insights applied
+        decision = await adjudicationEngine.adjudicate(normalized, medNecessity);
         fraudAnalysis = fraud;
       } catch (err) {
         console.error('LLM analysis failed, continuing with rule-based only:', err.message);
       }
     }
-
-    // Run adjudication engine
-    const decision = await adjudicationEngine.adjudicate(normalized, llmAnalysis);
 
     // Merge fraud analysis into decision
     if (fraudAnalysis && fraudAnalysis.anomaliesDetected) {
