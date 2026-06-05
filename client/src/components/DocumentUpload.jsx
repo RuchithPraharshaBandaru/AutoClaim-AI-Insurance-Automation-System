@@ -9,7 +9,8 @@ export default function DocumentUpload({ files, setFiles }) {
     const validFiles = fileArray.filter(f =>
       ['image/jpeg', 'image/png', 'image/webp', 'application/pdf'].includes(f.type)
     );
-    setFiles(prev => [...prev, ...validFiles].slice(0, 5));
+    // Replace files instead of appending to avoid mixing old and new claims
+    setFiles(validFiles.slice(0, 5));
   };
 
   const handleDrop = (e) => {

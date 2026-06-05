@@ -204,6 +204,16 @@ router.post('/', upload.array('files', 5), async (req, res) => {
         }
       });
       normalized.previousClaimsSameDay = previousClaimsCount;
+
+      const duplicateCount = await Claim.countDocuments({
+        memberId: normalized.memberId,
+        treatmentDate: {
+          $gte: startOfDay,
+          $lte: endOfDay
+        },
+        hospital: normalized.hospital
+      });
+      normalized.isDuplicate = duplicateCount > 0;
     }
 
     // Process uploaded files if any

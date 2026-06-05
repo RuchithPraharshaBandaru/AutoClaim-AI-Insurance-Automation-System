@@ -110,23 +110,23 @@ export default function ClaimResult({ result }) {
           </div>
         )}
 
+        {/* Notes */}
+        {result.notes && (
+          <div className="result-notes">
+            <strong style={{ color: 'var(--text-primary)', display: 'block', marginBottom: '0.4rem' }}>Notes</strong>
+            {result.notes}
+          </div>
+        )}
+
         {/* Flags */}
         {result.flags && result.flags.length > 0 && (
           <div className="result-section" style={{ gridColumn: '1 / -1' }}>
             <div className="result-section-title">Flags</div>
             {result.flags.map((flag, i) => (
               <span key={i} className="status-badge manual_review" style={{ marginRight: '0.5rem', marginBottom: '0.3rem' }}>
-                🚩 {flag}
+                {flag}
               </span>
             ))}
-          </div>
-        )}
-
-        {/* Notes */}
-        {result.notes && (
-          <div className="result-notes">
-            <strong style={{ color: 'var(--text-primary)', display: 'block', marginBottom: '0.4rem' }}>Notes</strong>
-            {result.notes}
           </div>
         )}
 
@@ -141,7 +141,7 @@ export default function ClaimResult({ result }) {
         {/* LLM Analysis */}
         {result.llmAnalysis && (
           <div className="result-notes" style={{ gridColumn: '1 / -1', background: 'rgba(139, 92, 246, 0.05)', borderLeft: '3px solid var(--status-review)' }}>
-            <strong style={{ color: 'var(--status-review)', display: 'block', marginBottom: '0.4rem' }}>🤖 AI Analysis</strong>
+            <strong style={{ color: 'var(--status-review)', display: 'block', marginBottom: '0.4rem' }}>AI Analysis</strong>
             {result.llmAnalysis}
           </div>
         )}
@@ -150,7 +150,7 @@ export default function ClaimResult({ result }) {
         {result.confidenceReasoning && (
           <div className="result-notes" style={{ gridColumn: '1 / -1', background: 'rgba(245, 158, 11, 0.05)', borderLeft: '3px solid var(--status-partial)' }}>
             <strong style={{ color: 'var(--status-partial)', display: 'block', marginBottom: '0.4rem' }}>
-              📊 Confidence: {Math.round((result.confidenceScore || 0) * 100)}% — Why?
+              Confidence: {Math.round((result.confidenceScore || 0) * 100)}% — Why?
             </strong>
             {result.confidenceReasoning}
           </div>
@@ -160,7 +160,7 @@ export default function ClaimResult({ result }) {
         {result.fraudAnalysis && result.fraudAnalysis.anomaliesDetected && (
           <div className="result-notes" style={{ gridColumn: '1 / -1', background: 'rgba(239, 68, 68, 0.06)', borderLeft: '3px solid var(--status-rejected)' }}>
             <strong style={{ color: 'var(--status-rejected)', display: 'block', marginBottom: '0.5rem' }}>
-              🚨 AI Fraud & Anomaly Detection (Risk: {Math.round((result.fraudAnalysis.riskScore || 0) * 100)}%)
+              AI Fraud & Anomaly Detection (Risk: {Math.round((result.fraudAnalysis.riskScore || 0) * 100)}%)
             </strong>
             {result.fraudAnalysis.anomalies?.map((a, i) => (
               <div key={i} style={{

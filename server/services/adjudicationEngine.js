@@ -94,6 +94,26 @@ class AdjudicationEngine {
     const treatmentDate = new Date(claimData.treatmentDate);
     const policyStart = new Date(this.policy.effective_date);
 
+    // Check duplicate claim
+    if (claimData.isDuplicate) {
+      result.decision = 'REJECTED';
+      result.rejectionReasons.push('DUPLICATE_CLAIM');
+      result.notes = 'A claim for this member at this hospital on this treatment date has already been submitted.';
+      result.approvedAmount = 0;
+      result.confidenceScore = 0.99;
+      return;
+    }
+
+    // Check member verification
+    if (!claimData.memberId || claimData.memberId.trim() === '' || !claimData.memberName) {
+      result.decision = 'REJECTED';
+      result.rejectionReasons.push('MEMBER_NOT_COVERED');
+      result.notes = 'Claimant not found in policy records (Member ID/Name missing).';
+      result.approvedAmount = 0;
+      result.confidenceScore = 0.99;
+      return;
+    }
+
     // Check policy active
     if (treatmentDate < policyStart) {
       result.decision = 'REJECTED';
@@ -192,6 +212,38 @@ class AdjudicationEngine {
       return;
     }
 
+    // Patient details match
+    if (docs.prescription.patientName && claimData.memberName) {
+      const rxName = docs.prescription.patientName.toLowerCase();
+      const policyName = claimData.memberName.toLowerCase();
+      // Simple check: does the rx name have any token in common with policy name?
+      const rxTokens = rxName.split(/\s+/);
+      const hasMatch = rxTokens.some(token => token.length > 2 && policyName.includes(token));
+      if (!hasMatch) {
+        result.decision = 'REJECTED';
+        result.rejectionReasons.push('PATIENT_MISMATCH');
+        result.notes = `Patient name on prescription (${docs.prescription.patientName}) does not match policy member name (${claimData.memberName}).`;
+        result.approvedAmount = 0;
+        result.confidenceScore = 0.95;
+        return;
+      }
+    }
+
+    // Date match
+    if (docs.bill.date && claimData.treatmentDate) {
+      const billDate = new Date(docs.bill.date);
+      const treatDate = new Date(claimData.treatmentDate);
+      const diffDays = Math.abs((billDate - treatDate) / (1000 * 60 * 60 * 24));
+      if (diffDays > 7) { // More than 7 days difference between treatment and bill is a mismatch
+        result.decision = 'REJECTED';
+        result.rejectionReasons.push('DATE_MISMATCH');
+        result.notes = `Document dates do not match. Bill date (${docs.bill.date}) is too far from treatment date (${claimData.treatmentDate}).`;
+        result.approvedAmount = 0;
+        result.confidenceScore = 0.95;
+        return;
+      }
+    }
+
     // Validate doctor registration number (hard requirement per adjudication rules)
     if (!docs.prescription.doctorReg) {
       result.decision = 'REJECTED';
@@ -231,7 +283,7 @@ class AdjudicationEngine {
         procedures.some(p => p.includes(excLower))
       ) {
         result.decision = 'REJECTED';
-        result.rejectionReasons.push('SERVICE_NOT_COVERED');
+        result.rejectionReasons.push('EXCLUDED_CONDITION');
         result.notes = `${exclusion} are excluded from coverage`;
         result.approvedAmount = 0;
         result.confidenceScore = 0.97;

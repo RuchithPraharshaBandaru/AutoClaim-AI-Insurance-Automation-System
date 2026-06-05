@@ -107,7 +107,7 @@ export default function SubmitClaim() {
       {testCases.length > 0 && (
         <div className="test-runner">
           <div className="test-runner-header">
-            <span className="test-runner-label">🧪 Quick Test Cases</span>
+            <span className="test-runner-label">Quick Test Cases</span>
           </div>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', marginTop: '0.75rem' }}>
             {testCases.map(tc => (
@@ -165,7 +165,7 @@ export default function SubmitClaim() {
         {/* Claim Form */}
         <div className="card">
           <div className="card-header">
-            <span className="card-title">📋 Claim Details</span>
+            <span className="card-title">Claim Details</span>
             {prefillData && (
               <span style={{
                 fontSize: '0.72rem',
@@ -175,14 +175,14 @@ export default function SubmitClaim() {
                 borderRadius: '999px',
                 fontWeight: 600,
               }}>
-                ✨ AI Auto-filled
+                AI Auto-filled
               </span>
             )}
           </div>
 
           {/* Document Upload with extraction */}
           <div style={{ marginBottom: '1.5rem' }}>
-            <div className="section-title">📎 Upload Documents — AI will auto-fill the form</div>
+            <div className="section-title">Upload Documents — AI will auto-fill the form</div>
             <DocumentUpload files={files} setFiles={setFiles} />
 
             {/* Extraction Loading State */}
@@ -200,7 +200,7 @@ export default function SubmitClaim() {
                 <div className="spinner" style={{ width: 24, height: 24, flexShrink: 0 }}></div>
                 <div>
                   <div style={{ fontWeight: 600, fontSize: '0.9rem', color: 'var(--accent-teal)' }}>
-                    🤖 AI is reading your documents...
+                    AI is reading your documents...
                   </div>
                   <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)', marginTop: '0.2rem' }}>
                     Extracting patient details, diagnosis, medicines, and bill amounts

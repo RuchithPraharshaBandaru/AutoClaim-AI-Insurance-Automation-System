@@ -172,7 +172,7 @@ export default function ClaimForm({ onSubmit, loading, prefillData }) {
   return (
     <form onSubmit={handleSubmit}>
       {/* Member Information */}
-      <div className="section-title">👤 Member Information</div>
+      <div className="section-title">Member Information</div>
       <div className="form-row-3">
         <div className="form-group">
           <label className="form-label">Member ID</label>
@@ -209,7 +209,7 @@ export default function ClaimForm({ onSubmit, loading, prefillData }) {
       </div>
 
       {/* Treatment Information */}
-      <div className="section-title">🏥 Treatment Details</div>
+      <div className="section-title">Treatment Details</div>
       <div className="form-row">
         <div className="form-group">
           <label className="form-label">Treatment Date</label>
@@ -277,7 +277,7 @@ export default function ClaimForm({ onSubmit, loading, prefillData }) {
       </div>
 
       {/* Prescription Details */}
-      <div className="section-title">📝 Prescription</div>
+      <div className="section-title">Prescription</div>
       <div className="form-row-3">
         <div className="form-group">
           <label className="form-label">Doctor Name</label>
@@ -364,7 +364,7 @@ export default function ClaimForm({ onSubmit, loading, prefillData }) {
       </div>
 
       {/* Bill Details */}
-      <div className="section-title">💰 Bill Breakdown</div>
+      <div className="section-title">Bill Breakdown</div>
       <div className="form-row-3">
         <div className="form-group">
           <label className="form-label">Consultation Fee (₹)</label>
@@ -440,7 +440,7 @@ export default function ClaimForm({ onSubmit, loading, prefillData }) {
               Processing Claim...
             </>
           ) : (
-            '⚡ Submit Claim for Adjudication'
+            'Submit Claim for Adjudication'
           )}
         </button>
       </div>

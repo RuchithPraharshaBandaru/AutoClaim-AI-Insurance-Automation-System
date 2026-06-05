@@ -15,19 +15,19 @@ export default function Navbar() {
           to="/"
           className={({ isActive }) => `navbar-link ${isActive ? 'active' : ''}`}
         >
-          ⚡ Submit Claim
+          Submit Claim
         </NavLink>
         <NavLink
           to="/dashboard"
           className={({ isActive }) => `navbar-link ${isActive ? 'active' : ''}`}
         >
-          📊 Dashboard
+          Dashboard
         </NavLink>
         <NavLink
           to="/policy"
           className={({ isActive }) => `navbar-link ${isActive ? 'active' : ''}`}
         >
-          📋 Policy
+          Policy
         </NavLink>
       </div>
     </nav>

@@ -11,6 +11,8 @@ async function run() {
     // Map snake_case to camelCase for the processor
     const claimData = processor.normalizeClaimData({
       ...tc.input_data,
+      memberId: tc.input_data.member_id,
+      memberName: tc.input_data.member_name,
       claimAmount: tc.input_data.claim_amount,
       memberJoinDate: tc.input_data.member_join_date || '2024-01-01',
       treatmentDate: tc.input_data.treatment_date,
@@ -20,6 +22,7 @@ async function run() {
       previousClaimsSameDay: tc.input_data.previous_claims_same_day || 0,
       documents: {
         prescription: {
+          patientName: p.patient_name || tc.input_data.member_name,
           doctorName: p.doctor_name,
           doctorReg: p.doctor_reg,
           diagnosis: p.diagnosis,
@@ -28,7 +31,10 @@ async function run() {
           treatment: p.treatment,
           testsPrescribed: p.tests_prescribed
         },
-        bill: tc.input_data.documents?.bill || {}
+        bill: {
+          ...(tc.input_data.documents?.bill || {}),
+          date: tc.input_data.documents?.bill?.date || tc.input_data.treatment_date
+        }
       }
     });
 

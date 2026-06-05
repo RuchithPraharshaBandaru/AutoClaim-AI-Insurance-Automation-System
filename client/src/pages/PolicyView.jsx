@@ -69,7 +69,7 @@ export default function PolicyView() {
       </div>
 
       {/* Coverage Categories */}
-      <div className="section-title">📦 Coverage Categories</div>
+      <div className="section-title">Coverage Categories</div>
       <div className="policy-grid">
         {/* Consultation */}
         <div className="policy-card">
@@ -83,7 +83,7 @@ export default function PolicyView() {
 
         {/* Diagnostic */}
         <div className="policy-card">
-          <div className="policy-card-title">🔬 Diagnostic Tests</div>
+          <div className="policy-card-title">Diagnostic Tests</div>
           <div className="policy-card-value">₹{cov.diagnostic_tests?.sub_limit?.toLocaleString()}</div>
           <ul className="policy-list" style={{ marginTop: '0.5rem' }}>
             {cov.diagnostic_tests?.covered_tests?.map((t, i) => (
@@ -94,7 +94,7 @@ export default function PolicyView() {
 
         {/* Pharmacy */}
         <div className="policy-card">
-          <div className="policy-card-title">💊 Pharmacy</div>
+          <div className="policy-card-title">Pharmacy</div>
           <div className="policy-card-value">₹{cov.pharmacy?.sub_limit?.toLocaleString()}</div>
           <ul className="policy-list" style={{ marginTop: '0.5rem' }}>
             <li>Generic drugs mandatory: {cov.pharmacy?.generic_drugs_mandatory ? 'Yes' : 'No'}</li>
@@ -104,7 +104,7 @@ export default function PolicyView() {
 
         {/* Dental */}
         <div className="policy-card">
-          <div className="policy-card-title">🦷 Dental</div>
+          <div className="policy-card-title">Dental</div>
           <div className="policy-card-value">₹{cov.dental?.sub_limit?.toLocaleString()}</div>
           <ul className="policy-list" style={{ marginTop: '0.5rem' }}>
             {cov.dental?.procedures_covered?.map((p, i) => (
@@ -116,7 +116,7 @@ export default function PolicyView() {
 
         {/* Vision */}
         <div className="policy-card">
-          <div className="policy-card-title">👁️ Vision</div>
+          <div className="policy-card-title">Vision</div>
           <div className="policy-card-value">₹{cov.vision?.sub_limit?.toLocaleString()}</div>
           <ul className="policy-list" style={{ marginTop: '0.5rem' }}>
             <li>Eye test: {cov.vision?.eye_test_covered ? 'Covered' : 'Not covered'}</li>
@@ -127,7 +127,7 @@ export default function PolicyView() {
 
         {/* Alternative Medicine */}
         <div className="policy-card">
-          <div className="policy-card-title">🌿 Alternative Medicine</div>
+          <div className="policy-card-title">Alternative Medicine</div>
           <div className="policy-card-value">₹{cov.alternative_medicine?.sub_limit?.toLocaleString()}</div>
           <ul className="policy-list" style={{ marginTop: '0.5rem' }}>
             {cov.alternative_medicine?.covered_treatments?.map((t, i) => (
@@ -160,7 +160,7 @@ export default function PolicyView() {
       </div>
 
       {/* Exclusions */}
-      <div className="section-title">🚫 Exclusions</div>
+      <div className="section-title">Exclusions</div>
       <div className="card" style={{ marginBottom: '1.5rem' }}>
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem' }}>
           {policy.exclusions?.map((ex, i) => (
@@ -170,7 +170,7 @@ export default function PolicyView() {
       </div>
 
       {/* Network Hospitals */}
-      <div className="section-title">🏥 Network Hospitals</div>
+      <div className="section-title">Network Hospitals</div>
       <div className="policy-grid">
         {policy.network_hospitals?.map((h, i) => (
           <div key={i} className="policy-card" style={{ padding: '0.75rem 1rem' }}>
@@ -183,7 +183,7 @@ export default function PolicyView() {
       </div>
 
       {/* Required Documents */}
-      <div className="section-title">📄 Required Documents</div>
+      <div className="section-title">Required Documents</div>
       <div className="card">
         <ul className="policy-list">
           {policy.claim_requirements?.documents_required?.map((d, i) => (
