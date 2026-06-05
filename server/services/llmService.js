@@ -350,8 +350,8 @@ USER QUESTION: ${userMessage}
 
 Respond naturally and helpfully. Keep answers concise (2-4 sentences for simple questions, more for complex ones).`;
 
-      const result = await this.model.generateContent(prompt);
-      return { reply: result.response.text() };
+      const resultText = await this._generateWithFallback(prompt);
+      return { reply: resultText };
     } catch (error) {
       console.error('Policy chat error:', error.message);
       return { reply: 'Sorry, I encountered an error processing your question. Please try again.' };
