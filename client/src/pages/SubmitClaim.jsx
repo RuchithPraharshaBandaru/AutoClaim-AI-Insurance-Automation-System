@@ -39,6 +39,8 @@ export default function SubmitClaim() {
     setExtractionMessage('');
     setExtractionWarnings([]);
     setError('');
+    setResult(null); // Clear previous results
+    setPrefillData(null); // Clear previous form data
 
     try {
       const formData = new FormData();
