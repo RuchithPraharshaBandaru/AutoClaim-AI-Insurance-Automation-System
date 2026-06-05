@@ -460,11 +460,16 @@ class AdjudicationEngine {
       return;
     }
 
-    // Per-claim limit — check the relevant amount against applicable limit
+    // Per-claim limit or sub-limit check
     if (amountToCheck > applicableLimit) {
       result.decision = 'REJECTED';
-      result.rejectionReasons.push('PER_CLAIM_EXCEEDED');
-      result.notes = `Claim amount exceeds per-claim limit of ₹${applicableLimit}`;
+      if (applicableLimit !== this.policy.coverage_details.per_claim_limit) {
+        result.rejectionReasons.push('SUB_LIMIT_EXCEEDED');
+        result.notes = `Claim amount exceeds category sub-limit of ₹${applicableLimit}`;
+      } else {
+        result.rejectionReasons.push('PER_CLAIM_EXCEEDED');
+        result.notes = `Claim amount exceeds per-claim limit of ₹${applicableLimit}`;
+      }
       result.approvedAmount = 0;
       result.confidenceScore = 0.98;
       return;
