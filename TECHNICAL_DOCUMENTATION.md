@@ -35,6 +35,7 @@ graph TD
         State[React State]
         DocUpload[Document Uploader]
         Form[Claim Form]
+        Chatbot[Policy Chatbot]
     end
     
     %% Backend Components
@@ -53,28 +54,33 @@ graph TD
     %% External Services
     GoogleAI{{Google Gemini API}}
 
-    %% Flow
-    User -->|Interacts with| UI
-    UI --> DocUpload
+    %% Flow - Document Extraction
+    User -->|Uploads Document| DocUpload
     DocUpload -->|Sends File| Router
-    
     Router --> DocProc
     DocProc -->|Image/PDF| LLM
-    LLM <-->|API Calls| GoogleAI
+    LLM <-->|Vision API| GoogleAI
     LLM -->|Extracted JSON| Router
     Router -->|Auto-fills| Form
     
+    %% Flow - Claim Submission
     User -->|Submits| Form
     Form -->|Claim Payload| Router
     Router -->|1. Fast Rules Check| Engine
     Engine -->|Reads Limits| Data
     
     Router -->|2. Medical Necessity & Fraud| LLM
-    LLM <-->|API Calls| GoogleAI
+    LLM <-->|Text API| GoogleAI
     
     Router -->|3. Final Adjudication| Engine
-    Engine -->|Decision JSON| UI
+    Engine -->|Decision JSON| Router
+    Router -->|Response JSON| UI
     UI -->|Displays Result| User
+
+    %% Flow - Chatbot
+    User -->|Asks Questions| Chatbot
+    Chatbot -->|Message Payload| Router
+    Router -->|RAG Context| LLM
 ```
 
 ---
