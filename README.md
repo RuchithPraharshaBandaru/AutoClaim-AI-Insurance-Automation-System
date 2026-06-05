@@ -88,48 +88,10 @@ npm run dev
 | Dashboard | `/dashboard` | View all claims with status filters and expandable details |
 | Policy | `/policy` | Browse coverage limits, exclusions, and waiting periods |
 
-## API Endpoints
+## Documentation
 
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| `POST` | `/api/claims/extract` | Extract document info via Vision LLM |
-| `POST` | `/api/claims` | Submit a new claim for Adjudication |
-| `POST` | `/api/claims/test/:caseId` | Run a test case (TC001–TC010) |
-| `GET` | `/api/policy` | Get full policy terms |
-| `POST` | `/api/policy/chat` | Chat with policy assistant |
-| `GET` | `/api/test-cases` | List available test cases |
-| `GET` | `/api/health` | Server health check |
-
-## Test Cases
-
-| ID | Scenario | Expected Decision |
-|----|----------|-------------------|
-| TC001 | Simple consultation — all valid | ✅ APPROVED (₹1,350) |
-| TC002 | Root canal + teeth whitening | ⚠️ PARTIAL (₹8,000) |
-| TC003 | Amount exceeds per-claim limit | ❌ REJECTED |
-| TC004 | Missing prescription | ❌ REJECTED |
-| TC005 | Diabetes during waiting period | ❌ REJECTED |
-| TC006 | Ayurvedic treatment | ✅ APPROVED (₹4,000) |
-| TC007 | MRI without pre-authorization | ❌ REJECTED |
-| TC008 | Multiple claims same day (fraud) | 🔍 MANUAL_REVIEW |
-| TC009 | Weight loss (excluded) | ❌ REJECTED |
-| TC010 | Network hospital cashless | ✅ APPROVED (₹3,600) |
-
-## Assumptions
-
-1. Policy effective date is 2024-01-01; all members with no explicit join date default to this
-2. Doctor registration format: `[STATE_CODE]/[NUMBER]/[YEAR]` (regex validated)
-3. MRI and CT Scan require pre-authorization when claim > ₹10,000
-4. Co-payment applies only to consultation fees (10%)
-5. Network discount (20%) applies to full claim amount at network hospitals
-6. Claims with 3+ prior claims on the same day are flagged for fraud review
-7. LLM features degrade gracefully when API key is not configured
-8. No user authentication (demo mode)
-
-## Tech Stack
-
-- **Frontend**: React 19 (Vite), React Router, Axios
-- **Backend**: Express.js, Multer, UUID
-- **AI**: Google Gemini 2.0 Flash
-- **Database**: Local JSON Files (Stateless MVP)
-- **Design**: Custom CSS with glassmorphism, Inter font
+For deep technical details, please refer to the **`TECHNICAL_DOCUMENTATION.md`** file, which contains:
+- Complete Architecture & System Flow Diagrams
+- Comprehensive API Endpoint Documentation
+- The 6-Step Decision Logic Flowchart
+- Foundational Assumptions and Policy Rules
