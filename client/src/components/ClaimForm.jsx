@@ -253,7 +253,7 @@ export default function ClaimForm({ onSubmit, loading, prefillData }) {
             className="form-input"
             name="claimAmount"
             type="number"
-            step="any"
+            step="0.01"
             placeholder="e.g. 1500.50"
             value={form.claimAmount}
             onChange={handleChange}
@@ -397,6 +397,7 @@ export default function ClaimForm({ onSubmit, loading, prefillData }) {
             className="form-input"
             name="consultationFee"
             type="number"
+            step="0.01"
             placeholder="1000"
             value={form.consultationFee}
             onChange={handleChange}
@@ -410,6 +411,7 @@ export default function ClaimForm({ onSubmit, loading, prefillData }) {
             className="form-input"
             name="diagnosticTests"
             type="number"
+            step="0.01"
             placeholder="500"
             value={form.diagnosticTests}
             onChange={handleChange}
@@ -423,6 +425,7 @@ export default function ClaimForm({ onSubmit, loading, prefillData }) {
             className="form-input"
             name="medicinesCost"
             type="number"
+            step="0.01"
             placeholder="500"
             value={form.medicinesCost}
             onChange={handleChange}
@@ -449,6 +452,7 @@ export default function ClaimForm({ onSubmit, loading, prefillData }) {
             className="form-input"
             name="otherCharges"
             type="number"
+            step="0.01"
             placeholder="0"
             value={form.otherCharges}
             onChange={handleChange}
