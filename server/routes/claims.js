@@ -244,6 +244,7 @@ router.post('/', upload.array('files', 5), async (req, res) => {
         // Re-run adjudication engine with LLM insights applied
         decision = await adjudicationEngine.adjudicate(normalized, medNecessity);
         fraudAnalysis = fraud;
+        llmAnalysis = context;
       } catch (err) {
         console.error('LLM analysis failed, continuing with rule-based only:', err.message);
       }
@@ -309,7 +310,7 @@ router.post('/', upload.array('files', 5), async (req, res) => {
       networkDiscount: decision.networkDiscount,
       cashlessApproved: decision.cashlessApproved,
       extractedData: fileExtractions,
-      llmAnalysis: llmContextAnalysis || '',
+      llmAnalysis: llmAnalysis || '',
       confidenceReasoning: decision.confidenceReasoning || '',
       fraudAnalysis: decision.fraudAnalysis || null,
     });
