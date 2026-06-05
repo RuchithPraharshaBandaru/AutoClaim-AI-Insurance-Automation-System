@@ -193,6 +193,16 @@ class AdjudicationEngine {
       return;
     }
 
+    // Must have valid doctor registration number
+    if (!docs.prescription.doctorReg || docs.prescription.doctorReg.trim() === '') {
+      result.decision = 'REJECTED';
+      result.rejectionReasons.push('DOCTOR_REG_INVALID');
+      result.notes = 'Doctor registration number is invalid or missing from the prescription';
+      result.approvedAmount = 0;
+      result.confidenceScore = 1.0;
+      return;
+    }
+
     // Must have bill
     if (!docs.bill || Object.keys(docs.bill).length === 0) {
       result.decision = 'REJECTED';

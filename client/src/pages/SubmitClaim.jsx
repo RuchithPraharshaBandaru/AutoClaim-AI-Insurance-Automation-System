@@ -258,7 +258,7 @@ export default function SubmitClaim() {
 
         {/* Result */}
         {result && (
-          <div className="fade-in" ref={resultRef}>
+          <div className="fade-in" ref={resultRef} style={{ scrollMarginTop: '100px' }}>
             <ClaimResult result={result} />
           </div>
         )}
