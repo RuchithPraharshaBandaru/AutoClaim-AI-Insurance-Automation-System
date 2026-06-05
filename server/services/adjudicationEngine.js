@@ -145,14 +145,15 @@ class AdjudicationEngine {
       return;
     }
 
-    // Check submission timeline (30 days from treatment)
+    // Check submission timeline (90 days from bill date)
     // Default to a safe date for old test cases if submissionDate is missing
     const submissionDate = claimData.submissionDate ? new Date(claimData.submissionDate) : new Date('2024-11-05');
-    const daysSinceTreatment = Math.floor((submissionDate - treatmentDate) / (1000 * 60 * 60 * 24));
-    if (daysSinceTreatment > this.policy.claim_requirements.submission_timeline_days) {
+    const billDate = claimData.billDate ? new Date(claimData.billDate) : treatmentDate;
+    const daysSinceBill = Math.floor((submissionDate - billDate) / (1000 * 60 * 60 * 24));
+    if (daysSinceBill > this.policy.claim_requirements.submission_timeline_days) {
       result.decision = 'REJECTED';
       result.rejectionReasons.push('LATE_SUBMISSION');
-      result.notes = `Claim submitted ${daysSinceTreatment} days after treatment, exceeding the ${this.policy.claim_requirements.submission_timeline_days}-day deadline.`;
+      result.notes = `Claim submitted more than ${this.policy.claim_requirements.submission_timeline_days} days from bill date.`;
       result.approvedAmount = 0;
       result.confidenceScore = 0.99;
       return;
