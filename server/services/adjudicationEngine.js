@@ -42,9 +42,11 @@ class AdjudicationEngine {
 
     // Step 3: Coverage verification
     this._checkCoverage(claimData, result);
+    if (result.decision === 'REJECTED') return result;
 
     // Step 4: Limit validation & amount calculation
     this._checkLimits(claimData, result);
+    if (result.decision === 'REJECTED') return result;
 
     // Step 5: Network hospital processing
     this._processNetworkBenefits(claimData, result);

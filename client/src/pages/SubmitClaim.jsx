@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import ClaimForm from '../components/ClaimForm';
 import ClaimResult from '../components/ClaimResult';
@@ -9,6 +9,14 @@ const API = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 export default function SubmitClaim() {
   const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(false);
+  const resultRef = useRef(null);
+
+  // Scroll to result when it's generated
+  useEffect(() => {
+    if (result && resultRef.current) {
+      resultRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }, [result]);
   const [extracting, setExtracting] = useState(false);
   const [error, setError] = useState('');
   const [files, setFiles] = useState([]);
@@ -202,10 +210,7 @@ export default function SubmitClaim() {
                 <div className="spinner" style={{ width: 24, height: 24, flexShrink: 0 }}></div>
                 <div>
                   <div style={{ fontWeight: 600, fontSize: '0.9rem', color: 'var(--accent-teal)' }}>
-                    AI is reading your documents...
-                  </div>
-                  <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)', marginTop: '0.2rem' }}>
-                    Extracting patient details, diagnosis, medicines, and bill amounts
+                    Extracting details...
                   </div>
                 </div>
               </div>
@@ -253,7 +258,7 @@ export default function SubmitClaim() {
 
         {/* Result */}
         {result && (
-          <div className="fade-in">
+          <div className="fade-in" ref={resultRef}>
             <ClaimResult result={result} />
           </div>
         )}
