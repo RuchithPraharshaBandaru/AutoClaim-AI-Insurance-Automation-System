@@ -89,7 +89,7 @@ npm run dev
 
 ## Documentation
 
-For deep technical details, please refer to the **`TECHNICAL_DOCUMENTATION.md`** file, which contains:
+For deep technical details, please refer to the **`TECHNICAL_DOCUMENTATION.md`**(https://github.com/RuchithPraharshaBandaru/Plum-Insurance-Automation-System/blob/main/TECHNICAL_DOCUMENTATION.md) file, which contains:
 - Complete Architecture & System Flow Diagrams
 - Comprehensive API Endpoint Documentation
 - The 6-Step Decision Logic Flowchart
