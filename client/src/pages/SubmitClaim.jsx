@@ -20,19 +20,11 @@ export default function SubmitClaim() {
   const [extracting, setExtracting] = useState(false);
   const [error, setError] = useState('');
   const [files, setFiles] = useState([]);
-  const [testCases, setTestCases] = useState([]);
-  const [runningTest, setRunningTest] = useState(null);
-  const [testResult, setTestResult] = useState(null);
   const [prefillData, setPrefillData] = useState(null);
   const [extractionMessage, setExtractionMessage] = useState('');
   const [extractionWarnings, setExtractionWarnings] = useState([]);
 
-  // Load test cases
-  useEffect(() => {
-    axios.get(`${API}/test-cases`)
-      .then(res => setTestCases(res.data.testCases || []))
-      .catch(() => {});
-  }, []);
+
 
   // Auto-extract when files are uploaded
   useEffect(() => {
@@ -86,23 +78,7 @@ export default function SubmitClaim() {
     }
   };
 
-  const runTestCase = async (caseId) => {
-    setRunningTest(caseId);
-    setTestResult(null);
-    setResult(null);
-    setError('');
-    setPrefillData(null);
 
-    try {
-      const response = await axios.post(`${API}/claims/test/${caseId}`);
-      setTestResult(response.data);
-      setResult(response.data.actualResult);
-    } catch (err) {
-      setError(err.response?.data?.error || err.message);
-    } finally {
-      setRunningTest(null);
-    }
-  };
 
   return (
     <div className="page">
@@ -113,48 +89,7 @@ export default function SubmitClaim() {
         </p>
       </div>
 
-      {/* Test Case Runner */}
-      {testCases.length > 0 && (
-        <div className="test-runner">
-          <div className="test-runner-header">
-            <span className="test-runner-label">Quick Test Cases</span>
-          </div>
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', marginTop: '0.75rem' }}>
-            {testCases.map(tc => (
-              <button
-                key={tc.caseId}
-                className="btn btn-sm btn-secondary"
-                onClick={() => runTestCase(tc.caseId)}
-                disabled={runningTest === tc.caseId}
-                title={tc.description}
-              >
-                {runningTest === tc.caseId ? '⏳' : '▶'} {tc.caseId}
-                <span className={`status-badge ${tc.expectedDecision?.toLowerCase().replace(' ', '_')}`} style={{ marginLeft: '0.3rem', padding: '0.15rem 0.4rem', fontSize: '0.65rem' }}>
-                  {tc.expectedDecision}
-                </span>
-              </button>
-            ))}
-          </div>
 
-          {testResult && (
-            <div style={{ marginTop: '0.75rem', padding: '0.75rem', background: 'var(--bg-primary)', borderRadius: 'var(--radius-sm)' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.3rem' }}>
-                <strong style={{ fontSize: '0.85rem' }}>{testResult.testCase.caseName}</strong>
-                <span className={`match-badge ${testResult.match ? 'pass' : 'fail'}`}>
-                  {testResult.match ? '✓ PASS' : '✕ FAIL'}
-                </span>
-              </div>
-              <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>
-                Expected: <strong>{testResult.expectedResult.decision}</strong> |
-                Got: <strong>{testResult.actualResult.decision}</strong>
-                {testResult.expectedResult.approved_amount !== undefined && (
-                  <> | Expected ₹{testResult.expectedResult.approved_amount} → Got ₹{testResult.actualResult.approvedAmount}</>
-                )}
-              </div>
-            </div>
-          )}
-        </div>
-      )}
 
       {/* Error Display */}
       {error && (
