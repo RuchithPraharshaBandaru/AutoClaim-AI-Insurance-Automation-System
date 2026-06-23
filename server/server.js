@@ -14,7 +14,7 @@ app.use(cors({
     'http://localhost:5173', 
     'http://localhost:3000',
     process.env.CLIENT_URL,
-    'https://plum-insurance-automation-system.vercel.app'
+    'https://autoclaim-ai-insurance-automation-system.vercel.app'
   ].filter(Boolean),
   credentials: true,
 }));
