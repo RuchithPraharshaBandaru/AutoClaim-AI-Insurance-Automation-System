@@ -1,6 +1,6 @@
-# Plum Insurance Automation System - Technical Documentation
+# AutoClaim AI - Technical Documentation
 
-This document serves as the comprehensive technical reference for the Plum Insurance Automation System MVP. It covers the technical approach, system architecture, API specifications, adjudication logic, and foundational assumptions.
+This document serves as the comprehensive technical reference for the AutoClaim AI System MVP. It covers the technical approach, system architecture, API specifications, adjudication logic, and foundational assumptions.
 
 ---
 

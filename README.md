@@ -1,6 +1,6 @@
-# Plum OPD Claim Adjudication Tool
+# AutoClaim AI - OPD Adjudication Tool
 
-An AI-powered full-stack application that automates the adjudication (approval/rejection) of Outpatient Department (OPD) insurance claims. Built for the Plum AI Automation Engineer Intern Assignment.
+An AI-powered full-stack application that automates the adjudication (approval/rejection) of Outpatient Department (OPD) insurance claims.
 
 ## Architecture
 

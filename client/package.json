@@ -1,5 +1,5 @@
 {
-  "name": "client",
+  "name": "autoclaim-opd-client",
   "private": true,
   "version": "0.0.0",
   "type": "module",

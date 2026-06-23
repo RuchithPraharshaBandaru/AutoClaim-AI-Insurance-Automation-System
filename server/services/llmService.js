@@ -336,7 +336,7 @@ Keep it concise and professional.`;
         ? '\n\nPrevious conversation:\n' + conversationHistory.map(m => `${m.role}: ${m.content}`).join('\n')
         : '';
 
-      const prompt = `You are a friendly and helpful insurance policy assistant for "Plum OPD Advantage" health plan. 
+      const prompt = `You are a friendly and helpful insurance policy assistant for "AutoClaim Health Advantage" health plan. 
 Answer the user's question ONLY based on the policy document provided below. 
 If the answer is not in the policy document, say so honestly.
 Be concise but helpful. Use bullet points where appropriate.

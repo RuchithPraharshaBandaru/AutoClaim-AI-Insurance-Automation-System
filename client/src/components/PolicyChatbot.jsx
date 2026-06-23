@@ -8,7 +8,7 @@ export default function PolicyChatbot() {
   const [messages, setMessages] = useState([
     {
       role: 'assistant',
-      content: 'Hi! I\'m your Plum policy assistant. Ask me anything about your OPD coverage — limits, exclusions, waiting periods, and more!',
+      content: 'Hi! I\'m your AutoClaim policy assistant. Ask me anything about your OPD coverage — limits, exclusions, waiting periods, and more!',
     },
   ]);
   const [input, setInput] = useState('');

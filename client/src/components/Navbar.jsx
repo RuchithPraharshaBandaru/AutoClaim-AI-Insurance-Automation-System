@@ -4,9 +4,9 @@ export default function Navbar() {
   return (
     <nav className="navbar">
       <div className="navbar-brand">
-        <div className="navbar-logo">P</div>
+        <div className="navbar-logo">A</div>
         <div>
-          <div className="navbar-title">Plum Claims</div>
+          <div className="navbar-title">AutoClaim AI</div>
           <div className="navbar-subtitle">OPD Adjudication Engine</div>
         </div>
       </div>

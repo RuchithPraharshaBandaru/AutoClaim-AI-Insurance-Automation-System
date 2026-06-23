@@ -1,5 +1,5 @@
 {
-  "name": "plum-opd-adjudication-server",
+  "name": "autoclaim-opd-server",
   "version": "1.0.0",
   "description": "Express backend for OPD Claim Adjudication Tool",
   "main": "server.js",

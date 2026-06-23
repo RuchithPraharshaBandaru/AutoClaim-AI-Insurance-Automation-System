@@ -62,7 +62,7 @@ const startServer = async () => {
   try {
     await connectDB();
     app.listen(PORT, () => {
-      console.log(`\n🚀 Plum OPD Adjudication Server running on port ${PORT}`);
+      console.log(`\n🚀 AutoClaim AI Adjudication Server running on port ${PORT}`);
       console.log(`   API: http://localhost:${PORT}/api`);
       console.log(`   Health: http://localhost:${PORT}/api/health`);
       console.log(`   LLM: ${process.env.GEMINI_API_KEY ? '✅ Gemini configured' : '⚠️  No API key (rule-based only)'}`);
