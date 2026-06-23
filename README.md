@@ -1,37 +1,48 @@
-# AutoClaim AI - OPD Adjudication Tool
+# AutoClaim AI - Intelligent OPD Adjudication System
 
-An AI-powered full-stack application that automates the adjudication (approval/rejection) of Outpatient Department (OPD) insurance claims.
+![AutoClaim AI Hero](https://img.shields.io/badge/Status-Active-success) ![License](https://img.shields.io/badge/License-MIT-blue) ![Stack](https://img.shields.io/badge/Stack-MERN%20%7C%20Gemini%20AI-orange)
 
-## Architecture
+An enterprise-grade, AI-powered full-stack application designed to completely automate the adjudication (approval, rejection, or partial payment) of Outpatient Department (OPD) health insurance claims. 
 
-- **Frontend**: React (Vite) with custom glassmorphism CSS
-- **Backend**: Node.js & Express.js
-- **AI/LLM**: Google  Flash API (for multimodal document extraction and medical necessity checks)
-- **Database**: Stateless (Uses local JSON files for policy terms and test cases)
+## 📖 The Problem
+Traditional health insurance claim processing is highly manual, slow, and error-prone. Claims adjusters spend countless hours cross-referencing messy handwritten doctor prescriptions against complex 100-page policy PDFs to verify coverage limits, exclusions, and waiting periods.
 
-### Key Features
+## 💡 The Solution: AutoClaim AI
+AutoClaim AI acts as a digital "first-pass" claims adjuster. By combining a **deterministic, rule-based engine** for hard policy constraints with **Generative AI (Google Gemini)** for contextual analysis, the system can instantly process a claim from document upload to final decision in seconds.
 
-- **5-Step Adjudication Engine** — Rule-based decision logic covering eligibility, document validation, coverage, limits, and medical necessity
-- **AI Document Extraction** — Upload medical documents (images/PDFs) and extract structured data using Gemini
-- **AI Fraud & Anomaly Detection** — LLM detects billing anomalies, medication-diagnosis mismatches, and suspicious patterns
-- **Confidence Score Explainability** — Not just a number; the AI explains WHY the confidence is what it is
-- **RAG-Powered Policy Chatbot** — Floating chat widget lets users ask natural-language questions about their coverage
-- **Illegible Document Handling** — AI explicitly avoids hallucinating data from blurry documents
-- **10 Pre-built Test Cases** — Run TC001–TC010 with one click and compare expected vs actual results
+## ✨ Core Capabilities
 
-### Decision Types
+- **🧠 Multi-stage Adjudication Engine**
+  Evaluates claims through a rigorous 5-step pipeline: Patient Eligibility ➔ Document Validation ➔ Coverage & Limits ➔ Waiting Periods ➔ Medical Necessity.
+- **📄 Multimodal Document Extraction** 
+  Users can upload raw images or PDFs of prescriptions/bills. The system uses Vision LLMs to extract structured JSON data (Diagnosis, Medicines, Doctor Reg No.) directly from the documents, ignoring blurry or illegible submissions to prevent AI hallucinations.
+- **🕵️ AI Fraud & Anomaly Detection**
+  The LLM cross-references the prescribed medications against the stated diagnosis. If a patient claims ₹5,000 for "Vitamin C" under a "Viral Fever" diagnosis, the AI automatically flags it as a billing anomaly for `MANUAL_REVIEW`.
+- **💬 RAG-Powered Policy Chatbot**
+  A persistent, floating chat widget that uses Retrieval-Augmented Generation to let users ask natural-language questions about their exact coverage limits, waiting periods, and exclusions based on the raw policy JSON.
+- **📊 Explainable AI Confidence Scores**
+  The system doesn't just output a decision; it provides a human-readable "Confidence Reasoning" paragraph explaining exactly *why* the AI made that decision, building trust for human auditors.
 
-| Decision | Description |
+## 🛠️ Technology Stack
+
+- **Frontend**: React (Vite) with custom glassmorphism CSS, responsive layouts, and interactive dashboards.
+- **Backend**: Node.js & Express.js REST API.
+- **Artificial Intelligence**: Google Gemini 2.0 Flash (Multimodal Vision & Contextual Analysis).
+- **Architecture**: Stateless MVP architecture relying on robust local JSON mock data for rapid deployment and testing without heavy database overhead.
+
+### Adjudication Outcomes
+
+| Decision Type | Trigger Condition |
 |----------|-------------|
-| ✅ APPROVED | All checks passed, claim fully covered |
-| ❌ REJECTED | Failed one or more adjudication rules |
-| ⚠️ PARTIAL | Some items covered, some excluded (e.g. cosmetic) |
-| 🔍 MANUAL_REVIEW | Flagged for human review (fraud, high-value, low confidence) |
+| 🟢 **APPROVED** | All rules passed, medications align with diagnosis, claim within annual limits. |
+| 🔴 **REJECTED** | Hard rule failure (e.g., policy expired, unregistered doctor, condition in 30-day waiting period). |
+| 🟡 **PARTIAL** | Core treatment covered, but specific items (e.g., cosmetic supplements) were automatically excluded. |
+| 🟠 **MANUAL_REVIEW** | Fraud detected, blurry documents, or low AI confidence score. Escalated to human adjuster. |
 
-## Documentation
+## 📚 Deep Dive Documentation
 
-For deep technical details, please refer to the **`TECHNICAL_DOCUMENTATION.md`**(https://github.com/RuchithPraharshaBandaru/Plum-Insurance-Automation-System/blob/main/TECHNICAL_DOCUMENTATION.md) file, which contains:
-- Complete Architecture & System Flow Diagrams
+For recruiters or engineers looking to dive into the architecture, please refer to the **[TECHNICAL_DOCUMENTATION.md](./TECHNICAL_DOCUMENTATION.md)** file, which contains:
+- Complete System Architecture & Data Flow Diagrams
 - Comprehensive API Endpoint Documentation
 - The 6-Step Decision Logic Flowchart
 - Foundational Assumptions and Policy Rules
