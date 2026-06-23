@@ -1,29 +1,27 @@
 # AutoClaim AI - Intelligent OPD Adjudication System
 
-![AutoClaim AI Hero](https://img.shields.io/badge/Status-Active-success) ![License](https://img.shields.io/badge/License-MIT-blue) ![Stack](https://img.shields.io/badge/Stack-MERN%20%7C%20Gemini%20AI-orange)
-
 An enterprise-grade, AI-powered full-stack application designed to completely automate the adjudication (approval, rejection, or partial payment) of Outpatient Department (OPD) health insurance claims. 
 
-## 📖 The Problem
+## The Problem
 Traditional health insurance claim processing is highly manual, slow, and error-prone. Claims adjusters spend countless hours cross-referencing messy handwritten doctor prescriptions against complex 100-page policy PDFs to verify coverage limits, exclusions, and waiting periods.
 
-## 💡 The Solution: AutoClaim AI
-AutoClaim AI acts as a digital "first-pass" claims adjuster. By combining a **deterministic, rule-based engine** for hard policy constraints with **Generative AI (Google Gemini)** for contextual analysis, the system can instantly process a claim from document upload to final decision in seconds.
+## The Solution: AutoClaim AI
+AutoClaim AI acts as a digital "first-pass" claims adjuster. By combining a deterministic, rule-based engine for hard policy constraints with Generative AI (Google Gemini) for contextual analysis, the system can instantly process a claim from document upload to final decision in seconds.
 
-## ✨ Core Capabilities
+## Core Capabilities
 
-- **🧠 Multi-stage Adjudication Engine**
-  Evaluates claims through a rigorous 5-step pipeline: Patient Eligibility ➔ Document Validation ➔ Coverage & Limits ➔ Waiting Periods ➔ Medical Necessity.
-- **📄 Multimodal Document Extraction** 
+- **Multi-stage Adjudication Engine**
+  Evaluates claims through a rigorous 5-step pipeline: Patient Eligibility -> Document Validation -> Coverage & Limits -> Waiting Periods -> Medical Necessity.
+- **Multimodal Document Extraction** 
   Users can upload raw images or PDFs of prescriptions/bills. The system uses Vision LLMs to extract structured JSON data (Diagnosis, Medicines, Doctor Reg No.) directly from the documents, ignoring blurry or illegible submissions to prevent AI hallucinations.
-- **🕵️ AI Fraud & Anomaly Detection**
-  The LLM cross-references the prescribed medications against the stated diagnosis. If a patient claims ₹5,000 for "Vitamin C" under a "Viral Fever" diagnosis, the AI automatically flags it as a billing anomaly for `MANUAL_REVIEW`.
-- **💬 RAG-Powered Policy Chatbot**
+- **AI Fraud & Anomaly Detection**
+  The LLM cross-references the prescribed medications against the stated diagnosis. If a patient claims Rs.5,000 for "Vitamin C" under a "Viral Fever" diagnosis, the AI automatically flags it as a billing anomaly for MANUAL_REVIEW.
+- **RAG-Powered Policy Chatbot**
   A persistent, floating chat widget that uses Retrieval-Augmented Generation to let users ask natural-language questions about their exact coverage limits, waiting periods, and exclusions based on the raw policy JSON.
-- **📊 Explainable AI Confidence Scores**
-  The system doesn't just output a decision; it provides a human-readable "Confidence Reasoning" paragraph explaining exactly *why* the AI made that decision, building trust for human auditors.
+- **Explainable AI Confidence Scores**
+  The system doesn't just output a decision; it provides a human-readable "Confidence Reasoning" paragraph explaining exactly why the AI made that decision, building trust for human auditors.
 
-## 🛠️ Technology Stack
+## Technology Stack
 
 - **Frontend**: React (Vite) with custom glassmorphism CSS, responsive layouts, and interactive dashboards.
 - **Backend**: Node.js & Express.js REST API.
@@ -34,12 +32,12 @@ AutoClaim AI acts as a digital "first-pass" claims adjuster. By combining a **de
 
 | Decision Type | Trigger Condition |
 |----------|-------------|
-| 🟢 **APPROVED** | All rules passed, medications align with diagnosis, claim within annual limits. |
-| 🔴 **REJECTED** | Hard rule failure (e.g., policy expired, unregistered doctor, condition in 30-day waiting period). |
-| 🟡 **PARTIAL** | Core treatment covered, but specific items (e.g., cosmetic supplements) were automatically excluded. |
-| 🟠 **MANUAL_REVIEW** | Fraud detected, blurry documents, or low AI confidence score. Escalated to human adjuster. |
+| **APPROVED** | All rules passed, medications align with diagnosis, claim within annual limits. |
+| **REJECTED** | Hard rule failure (e.g., policy expired, unregistered doctor, condition in 30-day waiting period). |
+| **PARTIAL** | Core treatment covered, but specific items (e.g., cosmetic supplements) were automatically excluded. |
+| **MANUAL_REVIEW** | Fraud detected, blurry documents, or low AI confidence score. Escalated to human adjuster. |
 
-## 📚 Deep Dive Documentation
+## Deep Dive Documentation
 
 For recruiters or engineers looking to dive into the architecture, please refer to the **[TECHNICAL_DOCUMENTATION.md](./TECHNICAL_DOCUMENTATION.md)** file, which contains:
 - Complete System Architecture & Data Flow Diagrams
