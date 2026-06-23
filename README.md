@@ -1,6 +1,6 @@
 # AutoClaim AI - Intelligent OPD Adjudication System
 
-An enterprise-grade, AI-powered full-stack application designed to completely automate the adjudication (approval, rejection, or partial payment) of Outpatient Department (OPD) health insurance claims. 
+An  AI-powered full-stack application designed to completely automate the adjudication (approval, rejection, or partial payment) of Outpatient Department (OPD) health insurance claims. 
 
 ## The Problem
 Traditional health insurance claim processing is highly manual, slow, and error-prone. Claims adjusters spend countless hours cross-referencing messy handwritten doctor prescriptions against complex 100-page policy PDFs to verify coverage limits, exclusions, and waiting periods.
@@ -25,7 +25,7 @@ AutoClaim AI acts as a digital "first-pass" claims adjuster. By combining a dete
 
 - **Frontend**: React (Vite) with custom glassmorphism CSS, responsive layouts, and interactive dashboards.
 - **Backend**: Node.js & Express.js REST API.
-- **Artificial Intelligence**: Google Gemini 2.0 Flash (Multimodal Vision & Contextual Analysis).
+- **Artificial Intelligence**: Google Gemini API (Multimodal Vision & Contextual Analysis).
 - **Architecture**: Stateless MVP architecture relying on robust local JSON mock data for rapid deployment and testing without heavy database overhead.
 
 ### Adjudication Outcomes
